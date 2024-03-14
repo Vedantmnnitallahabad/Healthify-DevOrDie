@@ -115,7 +115,7 @@ app.post('/patientlog',async (req,res)=>{
 
 if(existingPatient){
    if(existingPatient.password1==check.password){
-    res.send('good');
+    res.render('patientlogin_land',{patient:existingPatient});
    }
    else{
     res.send('wrong password');
