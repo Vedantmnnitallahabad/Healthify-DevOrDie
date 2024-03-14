@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/patient.css">
+  <title>Healthify Sign in page</title>
+  <script src="https://kit.fontawesome.com/7c1bac7904.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class = "container">
+    <div class = "form-box">
+      <h1 id = "title">Patient's Login</h1>
+      <form action="/patientlog" method="POST">
+        <div class = "input-group">
+           <div class = "input-field">
+              <i class="fa-solid fa-envelope"></i>
+              <input type = "email" placeholder = "Email" name="email">
+           </div>
+           <div class = "input-field">
+                <i class="fa-solid fa-lock"></i>
+              <input type = "password" placeholder = "Password" name="password">
+           </div>
+           <p>Do not have a account ? <a href = "patientreg">Click Here</a></p>
+           <div class="btn-field">
+            <button>Login</button>
+           </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

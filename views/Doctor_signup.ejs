@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/Doctors.css">
+  <title>Healthify signup page</title>
+  <script src="https://kit.fontawesome.com/7c1bac7904.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class = "container">
+    <div class = "form-box">
+      <h1 id = "title">Doctor's Sign Up</h1>
+      <form action="doctor-registration" method="POST">
+        <div class = "input-group">
+           <div class = "input-field" id = "nameField">
+            <i class="fa-solid fa-user"></i>
+            <input type = "text" placeholder = "Name" name="name">
+           </div>
+           <div class = "input-field">
+              <i class="fa-solid fa-envelope"></i>
+              <input type = "email" placeholder = "Email" name="email">
+           </div>
+           <div class = "input-field">
+                <i class="fa-solid fa-lock"></i>
+              <input type = "password" placeholder = "Password" name="password1">
+           </div>
+           <div class = "input-field">
+            <i class="fa-solid fa-lock"></i>
+          <input type = "password" placeholder = "Confirm Password" name="password2">
+       </div>
+          
+           <div class="btn-field">
+            <button>Submit</button>
+           </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
