@@ -137,3 +137,10 @@ app.get('/doctorreg',(req,res)=>{
 app.get('/doctorlogin',(req,res)=>{
     res.render('Doctor_login');
 });
+app.get('/about',(req,res)=>{
+    res.render('about');
+});
+
+app.use((req, res) => {
+    res.render('404');
+});

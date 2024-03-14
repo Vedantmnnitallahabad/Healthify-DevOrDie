@@ -1,0 +1,64 @@
+.a{
+            
+    color: aliceblue;
+    width: 70px; 
+    height: 70px; 
+    font-size: 125%;
+    padding: 10px 16px; 
+    border-radius: 35px; 
+    text-decoration: none;
+}
+ .a:hover {
+    background-color: rgba(0, 0, 0, 0.45);
+  }
+
+h1, h2, h4{
+    color: white;
+   
+    text-decoration: solid;
+}
+p{
+    color: white;
+    text-decoration: solid;
+    font-size: 125%;
+}
+body, html {
+    height: 100%;
+  }
+
+.bg {
+
+    background: url("/medicine1.jpg");
+  
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px; 
+}
+  
+li {
+    float: left;
+}
+  
+li a {
+    display: block;
+    color:white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+  
+
+  
+li a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
