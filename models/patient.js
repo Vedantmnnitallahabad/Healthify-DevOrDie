@@ -10,6 +10,10 @@ email:{
     type:String,
     required:true
 },
+profile_photo:{
+    type:Buffer,
+    //required:true
+},
 password1:{
     type:String,
     required:true
@@ -22,6 +26,4 @@ password2:{
 },{timestamps:true});
 
 const Patient=mongoose.model('Patient',patientSchema);
-const Doctor=mongoose.model('Doctor',patientSchema);
 module.exports=Patient;
-module.exports=Doctor;

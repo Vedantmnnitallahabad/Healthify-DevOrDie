@@ -1,8 +1,10 @@
 const express=require('express');
+const fs = require('fs');
 const app=express();
 const Patient=require('./models/patient');
-const Doctor=require('./models/patient');
+const Doctor=require('./models/doctor');
 const mongoose=require('mongoose');  //can use this object to connect to mongodb
+const upload = require('./upload');
 
 
 const uri="mongodb+srv://vedant:vedant1234@cluster0.xxpnhez.mongodb.net/Users?retryWrites=true&w=majority&appName=Cluster0";
@@ -44,6 +46,7 @@ app.post('/patient-registration', async (req, res) => {
                     const patient = new Patient(req.body);
                     patient.save()
                         .then(result => {
+                            console.log(result);
                             res.redirect('/');
                         })
                         .catch(err => {
@@ -74,8 +77,10 @@ app.post('/doctor-registration', async (req, res) => {
                     // No patient with the same email, proceed with registration
                  else{
                     const doctor = new Doctor(req.body);
+                    ////////doctor.profile_photo = fs.readFileSync(__dirname + '/uploads' + req.file.filename);
                     doctor.save()
                         .then(result => {
+                            console.log(result);
                             res.redirect('/');
                         })
                         .catch(err => {
