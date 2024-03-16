@@ -1,8 +1,11 @@
 const express=require('express');
 const app=express();
-const Patient=require('./models/patient');
-const Doctor=require('./models/patient');
-const mongoose=require('mongoose');  //can use this object to connect to mongodb
+const Modules=require('./models/patient');
+const Patient=Modules.patient;
+const Doctor=Modules.doctor;
+const Appointment=Modules.appointment;
+const mongoose=require('mongoose');
+  //can use this object to connect to mongodb
 
 
 const uri="mongodb+srv://vedant:vedant1234@cluster0.xxpnhez.mongodb.net/Users?retryWrites=true&w=majority&appName=Cluster0";
@@ -87,9 +90,11 @@ app.post('/doctor-registration', async (req, res) => {
           
            
     } else {
-        res.render('Signup',{
-            message:'Passwords do not match'
-        });
+        res.status(200).json({
+            alert:"Password do not match"})
+        //     ('Signup',{
+        //     message:'Passwords do not match'
+        // });
       
     }
 });
@@ -99,7 +104,7 @@ app.post('/doctorlog',async (req,res)=>{
  
  if(existingDoctor){
     if(existingDoctor.password1==check.password){
-     res.send('good');
+     res.render('doctorlogin_land',{doctor:existingDoctor});
     }
     else{
      res.send('wrong password');
@@ -140,7 +145,57 @@ app.get('/doctorlogin',(req,res)=>{
 app.get('/about',(req,res)=>{
     res.render('about');
 });
+app.get('/searchfordoctor',(req,res)=>{
+    Doctor.find()
+     .then(result=>{
+        res.render('doctors',{doctors:result});
+     });
+    
+})
+  app.get('/eachdoctor/:id',async (req,res)=>{
+    const id=req.params.id;
+    const doc=await Doctor.findById(id);
+    res.render('eachdoc',{doc:doc});
+  }) 
+  app.get('/bookappointment/:id',async (req,res)=>{
+    const id=req.params.id;
+    const doc=await Doctor.findById(id);
+    res.render('appointment',{doc:doc});
+  })
+  app.post('/appointment/:id',async (req,res)=>{
+    const id=req.params.id;
+    const doc=await Doctor.findById(id);
+    const pat= await Patient.findOne({ email: req.body.email});
+   const apt={
+    doctoremail:doc.email,
+    patientemail:req.body.email,
+    date:req.body.date,
+    time:req.body.time,
+    pat_id:pat._id
+   }
+    const appointment = new Appointment(apt);
+    appointment.save()
+        .then(result => {
+            res.render('eachdoc',{doc:doc});
+            
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send('Error registering doctor');
+        });
 
+  })
+  app.get('/viewappointments/:id',async (req,res)=>{
+    const id=req.params.id;
+    const doc=await Doctor.findById(id);
+    const appointment= await Appointment.find({ doctoremail: doc.email});
+    res.render('viewappointments',{appointment:appointment});
+  })
+  app.get('/findpat/:id',async (req,res)=>{
+    const id=req.params.id;
+    const pat=await Patient.findById(id); 
+    res.render('viewpat',{patient:pat});
+  })
 app.use((req, res) => {
     res.render('404');
 });

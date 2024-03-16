@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%if(appointment.length>0){%>
+
+        <%appointment.forEach(doctor=>{ %>
+         <h3><%= doctor.patientemail%></h3><br>
+          <h3><%= doctor.date %></h3><br>
+          <h3><%= doctor.time %></h3><br>
+          <a href="/findpat/<%=doctor.pat_id%>"><h3>VIEW PATIENT</h3><br></a>
+
+        <%})%>
+       
+        <% } else{ %>
+       <h1>NO APPOINTMENTS TO SHOW!!!</h1>
+       <% }%>
+</body>
+</html>
