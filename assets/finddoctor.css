@@ -1,0 +1,17 @@
+.heading{
+    display: flex;
+    justify-content: center;
+    color:  rgb(247, 249, 250) ;
+    max-height: 70px;
+    background-color: rgb(2, 202, 142);
+}
+#meme{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.container{
+    display:flex ;
+flex-direction:row ;
+justify-content: space-between;
+margin-top: 150px;
+}
