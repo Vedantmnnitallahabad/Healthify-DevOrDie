@@ -1,0 +1,70 @@
+.form-control{
+    display : flex;
+    margin-left : 60px;
+    width : 450px;
+}
+#navbarSupportedContent{
+    text-align: right;
+}
+#nav1{
+    display:flex ;
+    justify-content:space-evenly;
+}
+.container-fluid{
+    img{
+        height:100px ;
+        width:100px ;
+    }
+}
+.btnn{
+    margin-left: 30px;
+}
+.emergency{
+    margin-left: 100px;
+    margin-top: 10px;
+}
+.row{
+    margin-top: 50px;
+}
+.container .btn{
+    margin-top: 30px;
+    color: rgb(15, 2, 2);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+}
+.sub-heading{
+    text-align: center;
+    margin-top: 80px;
+}
+.doctor-image{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.health-centres{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.btn-specialist{
+    margin-top: 30px;
+    border: none;
+    color: rgb(15, 2, 2);
+    padding: 15px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    
+}
+.why_healthify{display: block;
+    margin-top: 50px;
+    img {height:600px;
+        width:1300px;
+        object-fit: contain;
+     }
+}
+.answer-healthify{
+    background-color: rgb(189, 233, 236);
+}
