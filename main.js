@@ -375,7 +375,16 @@ app.get('/logout', async (req, res) => {
     res.redirect('/');
 })
 
-
+app.get('/singleaptpat/:id',async (req,res)=>{
+    const id=req.params.id;
+    const apt=await Appointment.findById(id);
+    res.render('patsingleappointment',{appointment:apt});
+})
+app.get('/singleaptdoc/:id',async (req,res)=>{
+    const id=req.params.id;
+    const apt=await Appointment.findById(id);
+    res.render('docsingleappointment',{appointment:apt});
+})
 app.use((req, res) =>{
     res.render('404');
 });
