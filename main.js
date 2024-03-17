@@ -228,7 +228,8 @@ app.get('/searchfordoctor',(req,res)=>{
         const appointment = new Appointment(apt);
         appointment.save()
             .then(result => {
-                // res.status(200).send('appointment request sent');
+
+
                 res.redirect('/profile');
             })
             .catch(err => {
@@ -338,7 +339,6 @@ app.get('/profile', async (req,res) => {
             doctoremail:apt.doctoremail,
 
 
-
             patientemail:apt.patientemail,
 
             date:apt.date,
@@ -364,6 +364,17 @@ app.get('/logout', async (req, res) => {
     })
     res.redirect('/');
 })
+
+app.get('/logout', async (req, res) => {
+    req.session.destroy((err) => {
+        if(err){
+            console.log(err);
+            throw(err);
+        }
+    })
+    res.redirect('/');
+})
+
 
 app.use((req, res) =>{
     res.render('404');
