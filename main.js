@@ -39,7 +39,12 @@ app.use((req, res, next) => {
   });
 app.set('view engine', 'ejs');
 app.get('/',(req,res)=>{
-    res.render('Home');
+    if(!req.session.user){
+        res.render('Home');
+    }
+    else if(!req.session.user.qualifications){
+        res.redirect('/profile');
+    }
 });
 
 
@@ -116,14 +121,15 @@ app.post('/doctorlog',async (req,res)=>{
  
  if(existingDoctor){
     if(existingDoctor.password1==check.password){
-     res.render('doctordetails',{doctor:existingDoctor});
+        req.session.user = existingDoctor;
+        res.redirect('/profile');
     }
     else{
      res.send('wrong password');
     }
  }
  else{
-     res.send('Doctor do not exist!!!');
+     res.send('Doctor does not exist!');
  }
  });
  app.get('/contact',(req,res)=>{
@@ -135,19 +141,17 @@ app.post('/patientlog',async (req,res)=>{
 
 if(existingPatient){
    if(existingPatient.password1==check.password){
-
     console.log(req.session);
     console.log(req.session.id);
-    req.session.email = existingPatient.email;
-    res.render('patientdetails',{patient:existingPatient});
-
+    req.session.user = existingPatient;
+    res.redirect('/profile');
    }
    else{
     res.send('wrong password');
    }
 }
 else{
-    res.send('Patient Do not exist!!!');
+    res.send('Patient does not exist!');
 }
 });
 app.get('/patientlogin',(req,res)=>{
@@ -231,6 +235,18 @@ app.get('/searchfordoctor',(req,res)=>{
   
      
    
+})
+app.get('/profile', async (req,res) => {
+    if(!req.session.user){
+        res.redirect('/');
+    }
+    else if(!req.session.user.qualifications){
+        res.render('patientlogin_land',{patient:req.session.user});
+    }
+    else{
+        res.render('doctorlogin_land',{doctor:req.session.user});
+    }
+
 })
   app.get('/findpat/:id',async (req,res)=>{
     const id=req.params.id;
