@@ -15,12 +15,17 @@
     </html></title>
 </head>
 <body>
-
-    <h4>Qualifications:<%=doc.qualifications%></h4><br>
-    <h4>Speciality:<%=doc.speciality%></h4><br>
-    <h4>Locality:<%=doc.locality%></h4><br>
-    <h4>Hospital:<%=doc.hospital%></h4><br>
-    <a href="/bookappointment/<%=doc._id%>">BOOK APPOINTMENT</a>
+    <h1 align="center">Name:<%=doc.name%></h4><br>
+        <div align="center">
+            <h4>Qualifications:<%=doc.qualifications%></h4><br>
+            <h4>Email:<%=doc.email%></h4><br>
+            <h4>Speciality:<%=doc.speciality%></h4><br>
+            <h4>Locality:<%=doc.locality%></h4><br>
+            <h4>Hospital:<%=doc.hospital%></h4><br>
+            <h4>Experience:<%=doc.experience%></h4><br>
+            <a href="/bookappointment/<%=doc._id%>">BOOK APPOINTMENT</a>
+        </div>
+    
 
 </body>
 </html>
