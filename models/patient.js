@@ -113,11 +113,38 @@ const doctorSchema=new Schema({
         }
      
         },{timestamps:true});
+
+        const contactSchema=new Schema({
+            first_name:{
+                type: String,
+                required: true
+            },
+            last_name :{  type:String,
+                required:true
+            },
+            email:{
+                type:String,
+                required:true
+            },
+            
+           phone:{
+                type:String,
+                required:true
+            },
+            message:{
+                type:String,
+                required:true
+            }
+       
+            },{timestamps:true});
+
 const Patient=mongoose.model('Patient',patientSchema);
 const Doctor=mongoose.model('Doctor',doctorSchema);
 const Appointment=mongoose.model('Appointment',appointmentSchema);
+const Contact=mongoose.model('Contact',contactSchema);
 module.exports={
     patient:Patient,
     doctor:Doctor,
-    appointment:Appointment
+    appointment:Appointment,
+    contact:Contact
 };
