@@ -4,6 +4,7 @@ const Modules=require('./models/patient');
 const Patient=Modules.patient;
 const Doctor=Modules.doctor;
 const Appointment=Modules.appointment;
+const Contact=Modules.contact;
 const mongoose=require('mongoose');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -183,9 +184,7 @@ app.get('/doctorlogin',(req,res)=>{
         res.redirect('/profile')
     }
 });
-app.get('/about',(req,res)=>{
-    res.render('about');
-});
+
 app.get('/searchfordoctor',(req,res)=>{
     patientCheck(req, res);
     Doctor.find()
@@ -384,6 +383,20 @@ app.get('/singleaptdoc/:id',async (req,res)=>{
     const id=req.params.id;
     const apt=await Appointment.findById(id);
     res.render('docsingleappointment',{appointment:apt});
+})
+app.get('/about',(req,res)=>{
+   res.render('aboutourteam'); 
+})
+
+app.post('/submit_form',(req,res)=>{
+    const contact= new Contact(req.body);
+    contact.save()
+      .then(result=>{
+        res.redirect('/');
+      })
+      .catch(err=>{
+        console.log(err);
+      })
 })
 app.use((req, res) =>{
     res.render('404');
