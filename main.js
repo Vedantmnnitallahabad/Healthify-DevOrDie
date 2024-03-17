@@ -38,6 +38,20 @@ app.use((req, res, next) => {
     next();
   });
 app.set('view engine', 'ejs');
+
+function patientCheck(req, res){
+    //redirect to home if not logged in or if they are a doctor
+    if(!req.session.user || req.session.user.qualifications){
+        res.redirect('/patientlogin');
+    }
+}
+function doctorCheck(req, res){
+    //redirect to home if not logged in or if they are a patient
+    if(!req.session.user || req.session.user.height){
+        res.redirect('/doctorlogin');
+    }
+}
+
 app.get('/',(req,res)=>{
     res.render('Home');
 });
@@ -148,7 +162,7 @@ else{
 }
 });
 app.get('/patientlogin',(req,res)=>{
-    if(!req.session.user){
+    if(!req.session.user || req.session.user.qualifications){
         res.render('Signin');
     }
     else{
@@ -162,7 +176,7 @@ app.get('/doctorreg',(req,res)=>{
     res.render('Doctor_signup');
 });
 app.get('/doctorlogin',(req,res)=>{
-    if(!req.session.user){
+    if(!req.session.user || req.session.user.height){
         res.render('Doctor_login');
     }
     else{
@@ -173,6 +187,7 @@ app.get('/about',(req,res)=>{
     res.render('about');
 });
 app.get('/searchfordoctor',(req,res)=>{
+    patientCheck(req, res);
     Doctor.find()
      .then(result=>{
         res.render('finddoctor',{doctors:result});
@@ -185,6 +200,7 @@ app.get('/searchfordoctor',(req,res)=>{
     res.render('eachdoc',{doc:doc});
   }) 
   app.get('/bookappointment/:id',async (req,res)=>{
+    patientCheck(req, res);
     const id=req.params.id;
     const doc=await Doctor.findById(id);
     res.render('appointment',{doc:doc});
@@ -205,7 +221,9 @@ app.get('/searchfordoctor',(req,res)=>{
     const appointment = new Appointment(apt);
     appointment.save()
         .then(result => {
-            res.status(200).send('appointment request sent');
+            //alert({content : 'Appointment booked!'});
+            //res.status(200).send('appointment request sent');
+            res.redirect('/profile');
             
         })
         .catch(err => {
@@ -215,18 +233,21 @@ app.get('/searchfordoctor',(req,res)=>{
 
   })
   app.get('/viewappointments/:id',async (req,res)=>{
+    doctorCheck(req, res);
     const id=req.params.id;
     const doc=await Doctor.findById(id);
     const appointment= await Appointment.find({ doctoremail: doc.email});
     res.render('viewappointments',{appointment:appointment});
   })
   app.get('/patviewappointments/:id',async (req,res)=>{
+    patientCheck(req, res);
     const id=req.params.id;
     const pat=await Patient.findById(id);
     const appointment= await Appointment.find({ patientemail: pat.email});
     res.render('patviewappointment',{appointment:appointment});
   })
   app.delete('/deleteappointments/:id',(req,res)=>{
+    patientCheck(req, res);
     const id=req.params.id;
    
      Appointment.findByIdAndDelete(id) .then(result => {
@@ -252,16 +273,19 @@ app.get('/profile', async (req,res) => {
 
 })
   app.get('/findpat/:id',async (req,res)=>{
+    doctorCheck(req, res);
     const id=req.params.id;
     const pat=await Patient.findById(id); 
     res.render('viewpat',{patient:pat});
   })
   app.get('/finddocter/:id',async (req,res)=>{
+    patientCheck(req, res);
     const id=req.params.id;
     const doc=await Doctor.findById(id); 
     res.render('viewdoc',{doctor:doc});
   })
   app.get('/finddoc/:speciality',async (req,res)=>{
+    patientCheck(req, res);
     const speciality=req.params.speciality;
     const doc=await Doctor.find({ speciality: speciality});
     res.render('ind',{doctors:doc,DEPARTMENT:speciality}); 
@@ -288,6 +312,15 @@ app.get('/profile', async (req,res) => {
           console.log(err);
         });
   })
+app.get('/logout', async (req, res) => {
+    req.session.destroy((err) => {
+        if(err){
+            console.log(err);
+            throw(err);
+        }
+    })
+    res.redirect('/');
+})
 
 app.use((req, res) => {
     res.render('404');
