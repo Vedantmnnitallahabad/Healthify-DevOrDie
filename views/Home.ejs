@@ -9,7 +9,7 @@
 </head>
 <body>
     <!--1.Search Bar -->
-  <div class = "background">
+  <!--<div class = "background">
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid" id="nav1">
           <form class="d-flex" role="search">
@@ -23,7 +23,7 @@
             </div>
           </form>
         </div>
-      </nav>
+      </nav>-->
       <!--2.NavBar-->
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
@@ -34,10 +34,10 @@
                 <a class="nav-link active" aria-current="page" href="#">Services</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">About Us</a>
+                <a class="nav-link" href="/about">About Us</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link" href="#">Contact Us</a>
+                <a class="nav-link" href="/contact">Contact Us</a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="#">Action</a></li>
                   <li><a class="dropdown-item" href="#">Another action</a></li>
@@ -60,13 +60,13 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="/Untitled design (5).png" class="d-block w-100" alt="...">
+            <img src="/doctor_1.png" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
+            <img src="/doctor_2.png" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
+            <img src="/doctor_3.png" class="d-block w-100" alt="...">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -84,37 +84,40 @@
       <div class="container text-center">
             <a href="/patientlogin" class="btn btn-light">Book 
                 Appointment</a>
-            <a href="/patientlogin" class="btn btn-light">Consult Online</a>
-            <a href="/doctorlogin" class="btn btn-light">Docor Login/Register</a>
-            <a href="/patientlogin" class="btn btn-light">Patient Login/Register</a>
+            <!--<a href="/patientlogin" class="btn btn-light">Consult Online</a>-->
+            <a href="/doctorlogin" class="btn btn-light">Doctor Login</a>
+            <a href="/patientlogin" class="btn btn-light">Patient Login</a>
           </div>
         </div>
       </div>
 
       <!--5.Explore centres-->
-      <div class = "sub-heading">
-        <h2>Explore Our Centres</h2>
-        <p>Details about our excellent healthcare are listed below</p>
+      <div class = "sub-heading" style = "color: white; background-color: rgb(16, 112, 16);">
+        <br>
+        <h2 style = "font-size: 175%;">Explore Our Centres</h2>
+        <p style = "font-size: 135%;">Details about our excellent healthcare are listed below</p>
+        <br>
       </div>
       <!--6.Doctor's Image-->
       <div class = "doctor-image">
         <img src = "/doctorsss.png">
+      </div>
       <!--7.Different Centres buttons-->
-       </div>
+       <!-- </div>
        <div class="health-centres">
         <div class = "centre-1">
-            <button type="button" class="btn btn-light">
-                Orthopaedic</button>
-            <button type="button" class="btn btn-light">Cardiology</button>
-            <button type="button" class="btn btn-light">Neurology</button>
+            <a  href="/finddoc/Orthopaedic" class="btn btn-light">
+                Orthopaedic</a>
+            <a href="/finddoc/Cardiology" class="btn btn-light">Cardiology</a>
+            <a href="/finddoc/Neurology" class="btn btn-light">Neurology</a>
         </div>
         <div class = "centre-2">
-            <button type="button" class="btn btn-light">Urology 
-                Appointment</button>
-            <button type="button" class="btn btn-light">Dentistry</button>
-            <button type="button" class="btn btn-light">ENT</button> 
+            <a href="/finddoc/Urology " class="btn btn-light">Urology 
+                Appointment</a>
+            <a href="/finddoc/Dentistry" class="btn btn-light">Dentistry</a>
+            <a href="/finddoc/ENT" class="btn btn-light">ENT</a> 
         </div>
-     </div>
+    
 
      <!--8.Why choose Healthify-->
      <div class = "why_healthify">
@@ -136,7 +139,7 @@
             <h5>Section</h5>
             <ul class="nav flex-column">
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Services</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Contact Us</a></li>
+              <li class="nav-item mb-2"><a href="/contact" class="nav-link p-0 text-body-secondary">Contact Us</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About Us</a></li>
             </ul>
           </div>

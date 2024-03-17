@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctors</title>
+   
 </head>
 <body>
     <%if(doctors.length>0){%>
 
-        <%doctors.forEach(doctor=>{ %>
-          <a href="/eachdoctor/<%=doctor._id%>"><h1><%= doctor.name%></h1></a><br>
+        <%doctors.forEach(d   octor=>{ %>
+       <a href="/eachdoctor/<%=doctor._id%>"><h1><%= doctor.name%></h1></a><br>
           <h3><%= doctor.email %></h3><br>
 
         <%})%>

@@ -61,15 +61,22 @@
 .why_healthify{display: block;
     margin-top: 50px;
     img {height:600px;
-        width:1300px;
+        width:100%;
         object-fit: contain;
      }
 }
 .answer-healthify{
     background-color: rgb(189, 233, 236);
 }
+
 .container-fluid .collapse .navbar-nav .nav-item .nav-limk{
     :hover{
         background-color: grey;
+
+.carousel-inner{
+    img{
+        width : 1360px;
+        height : 300px;
+
     }
 }

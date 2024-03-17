@@ -6,15 +6,18 @@
     <title><%=patient.name%>'s Dashboard</title>
 </head>
 <body>
-    <h1>WELCOME!! <%=patient.name%></h1><br>
-
+    <h1 align="center">WELCOME!! <%=patient.name%></h1><br>
+  <div align="center">
     <h4>Age:<%=patient.age%></h4><br>
     <h4>Gender:<%=patient.gender%></h4><br>
     <h4>Height:<%=patient.height%></h4><br>
     <h4>Weight:<%=patient.weight%></h4><br>
     <h4>Bloodgroup:<%=patient.bloodgroup%></h4><br>
-    <a href="/searchfordoctor">SEARCH FOR DOCTOR</a>
+    <a href="/searchfordoctor">SEARCH FOR DOCTOR</a><br>
+    <a href="/patviewappointments/<%=patient._id%>">VIEW APPOINTMENTS</a>
 
+  </div>
+    
 
 </body>
 </html>

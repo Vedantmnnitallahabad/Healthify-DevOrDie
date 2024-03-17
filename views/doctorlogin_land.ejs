@@ -6,12 +6,17 @@
     <title><%=doctor.name%>'s Dashboard</title>
 </head>
 <body>
-    <h1>Welcome <%=doctor.name%>!!</h1><br>
-    <h4>Qualifications:<%=doctor.qualifications%></h4><br>
-    <h4>Speciality:<%=doctor.speciality%></h4><br>
-    <h4>Locality:<%=doctor.locality%></h4><br>
-    <h4>Hospital:<%=doctor.hospital%></h4><br>
-    <a href="/viewappointments/<%=doctor._id%>">VIEW APPOINTMENTS</a>
+    <h1 align="center">Welcome <%=doctor.name%>!!</h1><br>
+    <div align="center">
+        <h4>Qualifications:<%=doctor.qualifications%></h4><br>
+        <h4>Email:<%=doctor.email%></h4><br>
+        <h4>Speciality:<%=doctor.speciality%></h4><br>
+        <h4>Locality:<%=doctor.locality%></h4><br>
+        <h4>Hospital:<%=doctor.hospital%></h4><br>
+        <h4>Experience:<%=doctor.experience%></h4><br>
+        <a href="/viewappointments/<%=doctor._id%>">VIEW APPOINTMENTS</a>
+    </div>
+   
 
 
 </body>

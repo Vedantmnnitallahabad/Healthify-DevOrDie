@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Appointments Here</title>
+    <link rel="stylesheet" href="/a.css">
+    <style>
+    a{
+        text-decoration: none;
+      } 
+    </style>
+
+</head>
+<body>
+
+
+
+  <h1 align="center">VIEW APPOINTMENTS HERE!!!</h1><br>
+
+
+    <%if(appointment.length>0){%>
+
+        <div class="doc-repeat">
+            <%appointment.forEach(doctor=>{ %>
+             
+                <div class="doctor-card">
+                  <div class="doctor-info">
+      
+               
+                    DATE OF APPOINTMENT:<p class="doctor-experience"><%=doctor.date%></p>
+                   TIME OF APPOINTMENT: <p class="doctor-qualifications"><%=doctor.time%></p><br>
+                   STATUS: <p class="doctor-qualifications"><%=doctor.status%></p><br>
+                    <a class="book-appointment-btn" href="/finddocter/<%=doctor.doc_id%>">VIEW DOCTOR DETAILS</a><br><br><br>
+                    <a class="book-appointment-btn" href="/singleaptpat/<%=doctor._id%>">VIEW APPOINTMENT DETAILS</a>
+                  
+      
+                  </div>
+          
+                    
+                </div>
+             
+             
+            <%})%>
+          </div>
+    
+       
+        <% } else{ %>
+       <h1>NO APPOINTMENTS TO SHOW!!!</h1>
+       <% }%>
+
+
+       <script>
+        const trashcan = document.querySelector('.delete');
+
+        trashcan.addEventListener('click', (e) => {
+          const endpoint = `/deleteappointments/${trashcan.dataset.doc}`;
+    
+          fetch(endpoint, {
+            method: 'DELETE',
+          })
+          .then(response => response.json())
+          .then(data => window.location.href = data.redirect)
+          .catch(err => console.log(err));
+        });
+       </script>
+</body>
+</html>

@@ -4,23 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Details</title>
-    <link rel="stylesheet" href="./patientdetails.css">
+    <link rel="stylesheet" href="/doctordetails.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
     <div class = "heading">
-        <a href = "#">
+        <a href = "/">
          <button type="button" class="btns btn-light">Home</button>
           </a>
+          <a href = "/logout">
+            <button type="button" class="btns btn-light">Log Out</button>
+             </a>
           <div class = "my-profile">
             <h1>My Profile</h1>
           </div>
     </div>
 
      <div class="d-flex flex-column align-items-center text-center"> 
-        <img src="./Patient_image.png"  class="rounded-circle" width="150">
+        <img src="/doctor_animated.png"  class="rounded-circle" width="150">
         <div class="mt-3">
-            <h4>Vedant Ojha</h4>
+            <h4><%=doctor.name%></h4>
         </div>
      </div>
      <div class="card mb-3">
@@ -28,51 +31,43 @@
             <div class="row">
             <div class="col-sm-3"><h6 class="mb-0">Full Name</h6>
             </div>
-            <div class="col-sm-9 text-secondary"> Vedant Ojha
+            <div class="col-sm-9 text-secondary"><%=doctor.name%>
             </div>
         </div>
         <hr>
         <div class="row"><div class="col-sm-3">
-            <h6 class="mb-0">Email</h6></div><div class="col-sm-9 text-secondary"> vedant101@gmail.com
+            <h6 class="mb-0">Email</h6></div><div class="col-sm-9 text-secondary"><%=doctor.email%>
             </div>
         </div>
         <div class="row">
         </div>
         <hr>
-        <div class="row"><div class="col-sm-3"><h6 class="mb-0">Age</h6>
-        </div><div class="col-sm-9 text-secondary">20</div></div>
+        <div class="row"><div class="col-sm-3"><h6 class="mb-0">Qualifications</h6>
+        </div><div class="col-sm-9 text-secondary"><%=doctor.qualifications%></div></div>
         <hr>
         <div class="row"><div class="col-sm-3">
-            <h6 class="mb-0">Gender</h6></div><div class="col-sm-9 text-secondary"> 
-                Male</div>
+            <h6 class="mb-0">Speciality</h6></div><div class="col-sm-9 text-secondary"> 
+                Cardiologist</div>
         </div>
         <hr>
         <div class="row">
-            <div class="col-sm-3"><h6 class="mb-0">Height</h6>
+            <div class="col-sm-3"><h6 class="mb-0">Locality</h6>
             </div>
-            <div class="col-sm-9 text-secondary">5'11(feet)
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-sm-3"><h6 class="mb-0">Weight</h6>
-            </div>
-            <div class="col-sm-9 text-secondary">74Kg
+            <div class="col-sm-9 text-secondary"><%=doctor.locality%>
             </div>
         </div>
         <hr>
         <div class="row">
-            <div class="col-sm-3"><h6 class="mb-0">Blood Group</h6>
+            <div class="col-sm-3"><h6 class="mb-0">Hospital</h6>
             </div>
-            <div class="col-sm-9 text-secondary">B-Positive
+            <div class="col-sm-9 text-secondary"><%=doctor.hospital%>
             </div>
         </div>
         </div>
     </div>
-    <div id="container">
-        <button id="button1">Book Appointment</button>
-        <button id="button2">View Appointment</button>
-      </div>
+    <a href = "/viewappointments/<%=doctor._id%>">
+    <button type="button" class="btn btn-dark">Check Appointments</button>
+   </a>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
