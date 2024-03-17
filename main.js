@@ -39,12 +39,7 @@ app.use((req, res, next) => {
   });
 app.set('view engine', 'ejs');
 app.get('/',(req,res)=>{
-    if(!req.session.user){
-        res.render('Home');
-    }
-    else if(!req.session.user.qualifications){
-        res.redirect('/profile');
-    }
+    res.render('Home');
 });
 
 
@@ -141,8 +136,6 @@ app.post('/patientlog',async (req,res)=>{
 
 if(existingPatient){
    if(existingPatient.password1==check.password){
-    console.log(req.session);
-    console.log(req.session.id);
     req.session.user = existingPatient;
     res.redirect('/profile');
    }
@@ -155,7 +148,12 @@ else{
 }
 });
 app.get('/patientlogin',(req,res)=>{
-    res.render('Signin');
+    if(!req.session.user){
+        res.render('Signin');
+    }
+    else{
+        res.redirect('/profile');
+    }
 });
 app.get('/patientreg',(req,res)=>{
     res.render('Signup');
@@ -164,7 +162,12 @@ app.get('/doctorreg',(req,res)=>{
     res.render('Doctor_signup');
 });
 app.get('/doctorlogin',(req,res)=>{
-    res.render('Doctor_login');
+    if(!req.session.user){
+        res.render('Doctor_login');
+    }
+    else{
+        res.redirect('/profile')
+    }
 });
 app.get('/about',(req,res)=>{
     res.render('about');
@@ -241,10 +244,10 @@ app.get('/profile', async (req,res) => {
         res.redirect('/');
     }
     else if(!req.session.user.qualifications){
-        res.render('patientlogin_land',{patient:req.session.user});
+        res.render('patientdetails',{patient:req.session.user});
     }
     else{
-        res.render('doctorlogin_land',{doctor:req.session.user});
+        res.render('doctordetails',{doctor:req.session.user});
     }
 
 })
