@@ -5,6 +5,7 @@ const Patient=Modules.patient;
 const Doctor=Modules.doctor;
 const Appointment=Modules.appointment;
 const mongoose=require('mongoose');
+const { ObjectId } = require('mongodb');
   //can use this object to connect to mongodb
 
 
@@ -47,7 +48,7 @@ app.post('/patient-registration', async (req, res) => {
                     const patient = new Patient(req.body);
                     patient.save()
                         .then(result => {
-                            res.redirect('/');
+                            res.redirect('/patientlogin');
                         })
                         .catch(err => {
                             console.log(err);
@@ -79,7 +80,7 @@ app.post('/doctor-registration', async (req, res) => {
                     const doctor = new Doctor(req.body);
                     doctor.save()
                         .then(result => {
-                            res.redirect('/');
+                            res.redirect('/doctorlogin');
                         })
                         .catch(err => {
                             console.log(err);
@@ -111,7 +112,7 @@ app.post('/doctorlog',async (req,res)=>{
     }
  }
  else{
-     res.send('bad');
+     res.send('Doctor do not exist!!!');
  }
  });
 app.post('/patientlog',async (req,res)=>{
@@ -127,7 +128,7 @@ if(existingPatient){
    }
 }
 else{
-    res.send('bad');
+    res.send('Patient Do not exist!!!');
 }
 });
 app.get('/patientlogin',(req,res)=>{
@@ -148,7 +149,7 @@ app.get('/about',(req,res)=>{
 app.get('/searchfordoctor',(req,res)=>{
     Doctor.find()
      .then(result=>{
-        res.render('doctors',{doctors:result});
+        res.render('finddoctor',{doctors:result});
      });
     
 })
@@ -171,12 +172,14 @@ app.get('/searchfordoctor',(req,res)=>{
     patientemail:req.body.email,
     date:req.body.date,
     time:req.body.time,
-    pat_id:pat._id
+    pat_id:pat._id,
+    doc_id:doc._id,
+    status:"PENDING"
    }
     const appointment = new Appointment(apt);
     appointment.save()
         .then(result => {
-            res.render('eachdoc',{doc:doc});
+            res.status(200).send('appointment request sent');
             
         })
         .catch(err => {
@@ -191,11 +194,63 @@ app.get('/searchfordoctor',(req,res)=>{
     const appointment= await Appointment.find({ doctoremail: doc.email});
     res.render('viewappointments',{appointment:appointment});
   })
+  app.get('/patviewappointments/:id',async (req,res)=>{
+    const id=req.params.id;
+    const pat=await Patient.findById(id);
+    const appointment= await Appointment.find({ patientemail: pat.email});
+    res.render('patviewappointment',{appointment:appointment});
+  })
+  app.delete('/deleteappointments/:id',(req,res)=>{
+    const id=req.params.id;
+   
+     Appointment.findByIdAndDelete(id) .then(result => {
+      res.send('DELETED');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  
+     
+   
+})
   app.get('/findpat/:id',async (req,res)=>{
     const id=req.params.id;
     const pat=await Patient.findById(id); 
     res.render('viewpat',{patient:pat});
   })
+  app.get('/finddocter/:id',async (req,res)=>{
+    const id=req.params.id;
+    const doc=await Doctor.findById(id); 
+    res.render('viewdoc',{doctor:doc});
+  })
+  app.get('/finddoc/:speciality',async (req,res)=>{
+    const speciality=req.params.speciality;
+    const doc=await Doctor.find({ speciality: speciality});
+    res.render('ind',{doctors:doc,DEPARTMENT:speciality}); 
+  })
+
+  app.patch('/declappointment/:id',(req,res)=>{
+    const updates={"status": "CANCELLED"};
+
+    Appointment.findByIdAndUpdate(id,{$set: updates}).then(result => {
+        res.send('UPDATED');
+        })
+        .catch(err => {
+          console.log(err);
+        });
+  })
+
+  app.patch('/confappointment/:id',(req,res)=>{
+    const updates={status: "ACCEPTED"};
+    const id=req.params.id;
+    Appointment.findByIdAndUpdate({_id:id},{$set: updates}).then(result => {
+        res.send('UPDATED');
+        })
+        .catch(err => {
+          console.log(err);
+        });
+  })
+
 app.use((req, res) => {
     res.render('404');
 });
