@@ -121,25 +121,28 @@ app.post('/doctorlog',async (req,res)=>{
  
  if(existingDoctor){
     if(existingDoctor.password1==check.password){
-    console.log(req.session);
-    console.log(req.session.id);
-    req.session.user = existingDoctor;
-     res.redirect('/profile');
+        req.session.user = existingDoctor;
+        res.redirect('/profile');
     }
     else{
      res.send('wrong password');
     }
  }
  else{
-     res.send('Doctor do not exist!!!');
+     res.send('Doctor does not exist!');
  }
  });
+ app.get('/contact',(req,res)=>{
+    res.render('contact');
+ })
 app.post('/patientlog',async (req,res)=>{
    const check=req.body;
    const existingPatient= await Patient.findOne({ email: check.email});
 
 if(existingPatient){
    if(existingPatient.password1==check.password){
+    console.log(req.session);
+    console.log(req.session.id);
     req.session.user = existingPatient;
     res.redirect('/profile');
    }
