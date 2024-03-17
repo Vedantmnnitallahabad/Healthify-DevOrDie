@@ -73,3 +73,17 @@
   .book-appointment-btn:hover {
     background-color: #45a049;
   }
+  .delete{
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    text-align: center;
+  }
+  .delete:hover {
+    background-color: #45a049;
+  }

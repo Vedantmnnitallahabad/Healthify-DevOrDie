@@ -116,7 +116,7 @@ app.post('/doctorlog',async (req,res)=>{
  
  if(existingDoctor){
     if(existingDoctor.password1==check.password){
-     res.render('doctorlogin_land',{doctor:existingDoctor});
+     res.render('doctordetails',{doctor:existingDoctor});
     }
     else{
      res.send('wrong password');
@@ -126,16 +126,21 @@ app.post('/doctorlog',async (req,res)=>{
      res.send('Doctor do not exist!!!');
  }
  });
+ app.get('/contact',(req,res)=>{
+    res.render('contact');
+ })
 app.post('/patientlog',async (req,res)=>{
    const check=req.body;
    const existingPatient= await Patient.findOne({ email: check.email});
 
 if(existingPatient){
    if(existingPatient.password1==check.password){
+
     console.log(req.session);
     console.log(req.session.id);
     req.session.email = existingPatient.email;
-    res.render('patientlogin_land',{patient:existingPatient});
+    res.render('patientdetails',{patient:existingPatient});
+
    }
    else{
     res.send('wrong password');
