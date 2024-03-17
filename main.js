@@ -5,6 +5,8 @@ const Patient=Modules.patient;
 const Doctor=Modules.doctor;
 const Appointment=Modules.appointment;
 const mongoose=require('mongoose');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
   //can use this object to connect to mongodb
 
 
@@ -18,6 +20,15 @@ mongoose.connect(uri)
 //   .catch(err => console.log( err ));
 
 app.set('view engine', 'ejs');
+app.use(cookieParser('abcdefg'));
+app.use(session({
+    secret : "ABCDEFG",
+    saveUninitialized : false,
+    resave : false,
+    cookie:{
+        maxAge : 1000 * 60 * 60 * 24, 
+    }
+}));
 app.use(express.static('assets'));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
@@ -120,6 +131,9 @@ app.post('/patientlog',async (req,res)=>{
 
 if(existingPatient){
    if(existingPatient.password1==check.password){
+    console.log(req.session);
+    console.log(req.session.id);
+    req.session.email = existingPatient.email;
     res.render('patientlogin_land',{patient:existingPatient});
    }
    else{
