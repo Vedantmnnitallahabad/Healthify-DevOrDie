@@ -1,0 +1,46 @@
+.card{
+    width : 600px;
+    height : 600px;
+    text-align: center;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.btn{
+   margin-left: 45%;
+
+}
+.heading{
+    width: 100%;
+    height: 45px;
+    background-color:black;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+.btns{
+   border: none;
+   border-radius: 5px;
+   padding: 8px;
+   color: white;
+   font-size: 19px;
+   background-color: black;
+
+}
+ .btns:hover {
+    background-color: grey;
+    color: white;
+    margin-left: 0px;
+ }
+ .body{
+    background-image: url("../Aboutus/Dentist.png");
+ }
+ .heading .my-profile{
+    text-align: center;
+    margin-top: 30px;
+ }
+ .d-flex{
+    margin-top: 100px;
+    img{
+      width: 20%;
+    }
+ }

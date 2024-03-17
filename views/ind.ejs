@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/a.css">
+    <style>
+      a{
+        text-decoration: none;
+      }
+    </style>
+</head>
+<body>
+    <h1 class="dept"><%=DEPARTMENT%></h1><br><br>
+    <%if(doctors.length>0){%>
+      <div class="doc-repeat">
+      <%doctors.forEach(doctor=>{ %>
+       
+          <div class="doctor-card">
+            <div class="doctor-info">
+
+              <div class="doctor-photo"><img src="/doctor.jpg" alt="Doctor"> </div>
+              <a href="/eachdoctor/<%=doctor._id%>"><h2 class="doctor-name"><%=doctor.name%></h2></a>
+              <p class="doctor-qualifications"><%=doctor.qualifications%></p>
+              <p class="doctor-experience"><%=doctor.experience%> of Experience</p>
+              <p class="doctor-hospital">From hospital <%=doctor.hospital%></p>
+              <p class="doctor-address"><%=doctor.locality%></p>
+              <a class="book-appointment-btn" href="/bookappointment/<%=doctor._id%>">Book an Appointment</a>
+            </div>
+    
+              
+          </div>
+       
+       
+      <%})%>
+    </div>
+      <% } else{ %>
+     <h1>NO DOCTORS TO SHOW!!!</h1>
+     <% }%>
+    
+</body>
+</html>

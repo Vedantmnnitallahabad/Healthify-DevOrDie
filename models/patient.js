@@ -73,6 +73,10 @@ const doctorSchema=new Schema({
     hospital:{
         type:String,
         required:true
+    },
+    experience:{
+        type:String,
+        required:true
     }
 
     },{timestamps:true});
@@ -98,7 +102,16 @@ const doctorSchema=new Schema({
         pat_id:{
             type:String,
             required:true
+        },
+        doc_id:{
+            type:String,
+            required:true
+        },
+        status:{
+            type:String,
+            required:true
         }
+     
         },{timestamps:true});
 const Patient=mongoose.model('Patient',patientSchema);
 const Doctor=mongoose.model('Doctor',doctorSchema);
