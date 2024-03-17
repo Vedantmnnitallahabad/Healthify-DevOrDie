@@ -38,6 +38,20 @@ app.use((req, res, next) => {
     next();
   });
 app.set('view engine', 'ejs');
+
+function patientCheck(req, res){
+    //redirect to home if not logged in or if they are a doctor
+    if(!req.session.user || req.session.user.qualifications){
+        res.redirect('/patientlogin');
+    }
+}
+function doctorCheck(req, res){
+    //redirect to home if not logged in or if they are a patient
+    if(!req.session.user || req.session.user.height){
+        res.redirect('/doctorlogin');
+    }
+}
+
 app.get('/',(req,res)=>{
     res.render('Home');
 });
@@ -116,14 +130,15 @@ app.post('/doctorlog',async (req,res)=>{
  
  if(existingDoctor){
     if(existingDoctor.password1==check.password){
-     res.render('doctordetails',{doctor:existingDoctor});
+        req.session.user = existingDoctor;
+        res.redirect('/profile');
     }
     else{
      res.send('wrong password');
     }
  }
  else{
-     res.send('Doctor do not exist!!!');
+     res.send('Doctor does not exist!');
  }
  });
  app.get('/contact',(req,res)=>{
@@ -135,23 +150,24 @@ app.post('/patientlog',async (req,res)=>{
 
 if(existingPatient){
    if(existingPatient.password1==check.password){
-
-    console.log(req.session);
-    console.log(req.session.id);
-    req.session.email = existingPatient.email;
-    res.render('patientdetails',{patient:existingPatient});
-
+    req.session.user = existingPatient;
+    res.redirect('/profile');
    }
    else{
     res.send('wrong password');
    }
 }
 else{
-    res.send('Patient Do not exist!!!');
+    res.send('Patient does not exist!');
 }
 });
 app.get('/patientlogin',(req,res)=>{
-    res.render('Signin');
+    if(!req.session.user || req.session.user.qualifications){
+        res.render('Signin');
+    }
+    else{
+        res.redirect('/profile');
+    }
 });
 app.get('/patientreg',(req,res)=>{
     res.render('Signup');
@@ -160,12 +176,18 @@ app.get('/doctorreg',(req,res)=>{
     res.render('Doctor_signup');
 });
 app.get('/doctorlogin',(req,res)=>{
-    res.render('Doctor_login');
+    if(!req.session.user || req.session.user.height){
+        res.render('Doctor_login');
+    }
+    else{
+        res.redirect('/profile')
+    }
 });
 app.get('/about',(req,res)=>{
     res.render('about');
 });
 app.get('/searchfordoctor',(req,res)=>{
+    patientCheck(req, res);
     Doctor.find()
      .then(result=>{
         res.render('finddoctor',{doctors:result});
@@ -178,12 +200,14 @@ app.get('/searchfordoctor',(req,res)=>{
     res.render('eachdoc',{doc:doc});
   }) 
   app.get('/bookappointment/:id',async (req,res)=>{
+    patientCheck(req, res);
     const id=req.params.id;
     const doc=await Doctor.findById(id);
     res.render('appointment',{doc:doc});
   })
   app.post('/appointment/:id',async (req,res)=>{
     const id=req.params.id;
+
     const existingapt=await Appointment.findOne({patientemail:req.body.email});
     if(existingapt && existingapt.status==="PENDING"){
         res.send('Appointment already booked');
@@ -204,8 +228,8 @@ app.get('/searchfordoctor',(req,res)=>{
         const appointment = new Appointment(apt);
         appointment.save()
             .then(result => {
-                res.status(200).send('appointment request sent');
-                
+//                 res.status(200).send('appointment request sent');
+                res.redirect('/profile');
             })
             .catch(err => {
                 console.log(err);
@@ -214,20 +238,24 @@ app.get('/searchfordoctor',(req,res)=>{
     
     }
     
+
   })
   app.get('/viewappointments/:id',async (req,res)=>{
+    doctorCheck(req, res);
     const id=req.params.id;
     const doc=await Doctor.findById(id);
     const appointment= await Appointment.find({ doctoremail: doc.email});
     res.render('viewappointments',{appointment:appointment});
   })
   app.get('/patviewappointments/:id',async (req,res)=>{
+    patientCheck(req, res);
     const id=req.params.id;
     const pat=await Patient.findById(id);
     const appointment= await Appointment.find({ patientemail: pat.email});
     res.render('patviewappointment',{appointment:appointment});
   })
   app.delete('/deleteappointments/:id',(req,res)=>{
+    patientCheck(req, res);
     const id=req.params.id;
    
      Appointment.findByIdAndDelete(id) .then(result => {
@@ -240,17 +268,32 @@ app.get('/searchfordoctor',(req,res)=>{
      
    
 })
+app.get('/profile', async (req,res) => {
+    if(!req.session.user){
+        res.redirect('/');
+    }
+    else if(!req.session.user.qualifications){
+        res.render('patientdetails',{patient:req.session.user});
+    }
+    else{
+        res.render('doctordetails',{doctor:req.session.user});
+    }
+
+})
   app.get('/findpat/:id',async (req,res)=>{
+    doctorCheck(req, res);
     const id=req.params.id;
     const pat=await Patient.findById(id); 
     res.render('viewpat',{patient:pat});
   })
   app.get('/finddocter/:id',async (req,res)=>{
+    patientCheck(req, res);
     const id=req.params.id;
     const doc=await Doctor.findById(id); 
     res.render('viewdoc',{doctor:doc});
   })
   app.get('/finddoc/:speciality',async (req,res)=>{
+    patientCheck(req, res);
     const speciality=req.params.speciality;
     const doc=await Doctor.find({ speciality: speciality});
     res.render('ind',{doctors:doc,DEPARTMENT:speciality}); 
@@ -287,6 +330,7 @@ app.get('/searchfordoctor',(req,res)=>{
 
     
     const id=req.params.id;
+
     const apt=await  Appointment.findById(id);
     
     await  Appointment.replaceOne({_id:id}, 
@@ -309,6 +353,17 @@ app.get('/searchfordoctor',(req,res)=>{
          res.send('ACCEPTED');
 })
 
+
+
+app.get('/logout', async (req, res) => {
+    req.session.destroy((err) => {
+        if(err){
+            console.log(err);
+            throw(err);
+        }
+    })
+    res.redirect('/');
+})
 
 
 app.use((req, res) =>{
