@@ -19,21 +19,20 @@
   <h1 align="center">VIEW APPOINTMENTS HERE!!!</h1><br>
 
 
-    <%if(appointment.length>0){%>
+    
 
         <div class="doc-repeat">
-            <%appointment.forEach(doctor=>{ %>
+         
              
                 <div class="doctor-card">
                   <div class="doctor-info">
       
                
-                    DATE OF APPOINTMENT:<p class="doctor-experience"><%=doctor.date%></p>
-                   TIME OF APPOINTMENT: <p class="doctor-qualifications"><%=doctor.time%></p><br>
-                   STATUS: <p class="doctor-qualifications"><%=doctor.status%></p><br>
-                    <a class="book-appointment-btn" href="/finddocter/<%=doctor.doc_id%>">VIEW DOCTOR DETAILS</a><br><br><br>
-                    <a class="book-appointment-btn" href="/singleaptpat/<%=doctor._id%>">VIEW APPOINTMENT DETAILS</a>
-                  
+                    DATE OF APPOINTMENT:<p class="doctor-experience"><%=appointment.date%></p>
+                   TIME OF APPOINTMENT: <p class="doctor-qualifications"><%=appointment.time%></p><br>
+                   STATUS: <p class="doctor-qualifications"><%=appointment.status%></p><br>
+                    <a class="book-appointment-btn" href="/finddocter/<%=appointment.doc_id%>">VIEW DOCTOR DETAILS</a><br><br><br>
+                    <button class="delete" data-doc="<%= appointment._id %>">DELETE APPONTMENT</button>
       
                   </div>
           
@@ -41,14 +40,8 @@
                 </div>
              
              
-            <%})%>
           </div>
     
-       
-        <% } else{ %>
-       <h1>NO APPOINTMENTS TO SHOW!!!</h1>
-       <% }%>
-
 
        <script>
         const trashcan = document.querySelector('.delete');
