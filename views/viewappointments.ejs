@@ -22,7 +22,7 @@
 
         <div class="doc-repeat">
             <%appointment.forEach(doctor=>{ %>
-             
+             <%if(doctor.status!=="REJECTED"){%>
                 <div class="doctor-card">
                   <div class="doctor-info">
       
@@ -30,13 +30,13 @@
                     DATE OF APPOINTMENT:<p class="doctor-experience"><%=doctor.date%></p>
                    TIME OF APPOINTMENT: <p class="doctor-qualifications"><%=doctor.time%></p><br>
                     <a class="book-appointment-btn" href="/findpat/<%=doctor.pat_id%>">VIEW PATIENT DETAILS</a><br><br><br>
-                    <a class="book-appointment-btn" href="/declappointment/doctor._id">DECLINE</a><br><br><br>
-                    <a class="book-appointment-btn" href="/confappointment/doctor._id">ACCEPT</a>
+                    <button class="decl" data-doc="<%=doctor._id%>" >DECLINE</button><br><br><br>
+                    <button  class="acc" data-doc="<%=doctor._id%>">ACCEPT</button>
                   </div>
           
                     
                 </div>
-             
+             <%}%>
              
             <%})%>
           </div>
@@ -45,5 +45,32 @@
         <% } else{ %>
        <h1>NO APPOINTMENTS TO SHOW!!!</h1>
        <% }%>
+        
+       <script>
+        const trashcan = document.querySelector('.decl');
+
+        trashcan.addEventListener('click', (e) => {
+          const endpoint = `/declappointment/${trashcan.dataset.doc}`;
+    
+          fetch(endpoint, {
+            method: 'PUT',
+          })
+          .then(response => response.json())
+          .then(data => window.location.href = data.redirect)
+          .catch(err => console.log(err));
+        });
+        const trashcan2 = document.querySelector('.acc');
+
+        trashcan2.addEventListener('click', (e) => {
+          const endpoint = `/confappointment/${trashcan.dataset.doc}`;
+    
+          fetch(endpoint, {
+            method: 'PUT',
+          })
+          .then(response => response.json())
+          .then(data => window.location.href = data.redirect)
+          .catch(err => console.log(err));
+        });
+       </script>
 </body>
 </html>
