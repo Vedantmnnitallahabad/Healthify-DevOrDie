@@ -1,0 +1,56 @@
+.Heading{
+    width : 100%;
+    height : 45px;
+    background-color: rgb(41, 40, 40);
+    color: antiquewhite;
+}
+ .head{
+    display : flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.Heading .btn{
+    border: none;
+    color: white;
+    padding: 10px;
+}
+.btn:hover{
+    background-color: grey; /* Green */
+    color: white;
+}
+.para{
+    display : flex;
+    justify-content: center;
+    margin-top: 3%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.images{
+    margin-top: 150px;
+    display: flex;
+    justify-content: space-between;
+    img{
+      border-radius: 50%;
+    }
+    margin-left: 5%;
+    margin-right: 5%;
+}
+body{
+    background-color: rgb(243, 240, 240);
+}
+.image-4{
+    margin-top: 100px;
+    img{
+    border-radius: 50% ;
+    }
+    display: flex;
+    justify-content: center;
+}
+.text-2{
+    text-align: center;
+    margin-top: 20px;
+}
+.text-1{
+    margin-top: 5%;
+}
+
