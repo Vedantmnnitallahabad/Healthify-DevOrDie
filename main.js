@@ -207,29 +207,37 @@ app.get('/searchfordoctor',(req,res)=>{
   })
   app.post('/appointment/:id',async (req,res)=>{
     const id=req.params.id;
-    const doc=await Doctor.findById(id);
-    const pat= await Patient.findOne({ email: req.body.email});
-   const apt={
-    doctoremail:doc.email,
-    patientemail:req.body.email,
-    date:req.body.date,
-    time:req.body.time,
-    pat_id:pat._id,
-    doc_id:doc._id,
-    status:"PENDING"
-   }
-    const appointment = new Appointment(apt);
-    appointment.save()
-        .then(result => {
-            //alert({content : 'Appointment booked!'});
-            //res.status(200).send('appointment request sent');
-            res.redirect('/profile');
-            
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).send('Error registering doctor');
-        });
+
+    const existingapt=await Appointment.findOne({patientemail:req.body.email});
+    if(existingapt && existingapt.status==="PENDING"){
+        res.send('Appointment already booked');
+    }
+    else{
+        const doc=await Doctor.findById(id);
+        const pat= await Patient.findOne({ email: req.body.email});
+      
+       const apt={
+        doctoremail:doc.email,
+        patientemail:req.body.email,
+        date:req.body.date,
+        time:req.body.time,
+        pat_id:pat._id,
+        doc_id:doc._id,
+        status:"PENDING"
+       }
+        const appointment = new Appointment(apt);
+        appointment.save()
+            .then(result => {
+//                 res.status(200).send('appointment request sent');
+                res.redirect('/profile');
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).send('Error registering doctor');
+            });
+    
+    }
+    
 
   })
   app.get('/viewappointments/:id',async (req,res)=>{
@@ -291,27 +299,62 @@ app.get('/profile', async (req,res) => {
     res.render('ind',{doctors:doc,DEPARTMENT:speciality}); 
   })
 
-  app.patch('/declappointment/:id',(req,res)=>{
-    const updates={"status": "CANCELLED"};
+  app.put('/declappointment/:id',async (req,res)=>{
+   
+     const id=req.params.id;
+     const apt=await  Appointment.findById(id);
+    
+     await  Appointment.replaceOne({_id:id}, 
+         {
+             doctoremail:apt.doctoremail,
+ 
+             patientemail:apt.patientemail,
+ 
+             date:apt.date,
+ 
+             time:apt.time,
+ 
+             pat_id:apt.pat_id,
+ 
+             doc_id:apt.doc_id,
+ 
+             status: "REJECTED"
+          });
 
-    Appointment.findByIdAndUpdate(id,{$set: updates}).then(result => {
-        res.send('UPDATED');
-        })
-        .catch(err => {
-          console.log(err);
-        });
-  })
+          res.send('REJECTED');
 
-  app.patch('/confappointment/:id',(req,res)=>{
-    const updates={status: "ACCEPTED"};
+})
+
+
+  app.put('/confappointment/:id',async (req,res)=>{
+
+    
     const id=req.params.id;
-    Appointment.findByIdAndUpdate({_id:id},{$set: updates}).then(result => {
-        res.send('UPDATED');
-        })
-        .catch(err => {
-          console.log(err);
-        });
-  })
+
+    const apt=await  Appointment.findById(id);
+    
+    await  Appointment.replaceOne({_id:id}, 
+        {
+            doctoremail:apt.doctoremail,
+
+            patientemail:apt.patientemail,
+
+            date:apt.date,
+
+            time:apt.time,
+
+            pat_id:apt.pat_id,
+
+            doc_id:apt.doc_id,
+
+            status: "ACCEPTED"
+         });
+
+         res.send('ACCEPTED');
+})
+
+
+
 app.get('/logout', async (req, res) => {
     req.session.destroy((err) => {
         if(err){
@@ -322,6 +365,7 @@ app.get('/logout', async (req, res) => {
     res.redirect('/');
 })
 
-app.use((req, res) => {
+
+app.use((req, res) =>{
     res.render('404');
 });
