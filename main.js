@@ -173,6 +173,11 @@ app.get('/patientlogin',(req,res)=>{
 app.get('/patientreg',(req,res)=>{
     res.render('Signup');
 });
+
+app.get('/faq',(req,res)=>{
+    res.render('faq');
+});
+
 app.get('/doctorreg',(req,res)=>{
     res.render('Doctor_signup');
 });
