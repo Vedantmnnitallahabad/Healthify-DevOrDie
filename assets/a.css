@@ -1,13 +1,14 @@
 .doc-repeat{
   display:flex ;
-  flex-direction:row;
+  flex-direction:column;
+  
 }
 .doctor-card {
-    margin-left:10px;
-    margin-right:10px;
+  margin-left: 590px;
+  margin-bottom: 30px;
     width: 300px;
     padding: 20px;
-    background-color: #f1f1f1;
+    background-color: #e8f4fe;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
@@ -60,7 +61,7 @@
   
   .book-appointment-btn {
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #260ff4;
     color: white;
     border: none;
     border-radius: 5px;
@@ -71,7 +72,7 @@
   }
   .decl{
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color:  #260ff4;
     color: white;
     border: none;
     border-radius: 5px;
@@ -82,7 +83,7 @@
   }
   .acc{
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #260ff4;
     color: white;
     border: none;
     border-radius: 5px;
@@ -92,17 +93,17 @@
     text-align: center;
   }
   .acc:hover {
-    background-color: #45a049;
+    background-color:#537ef4;
   }
   .decl:hover {
-    background-color: #45a049;
+    background-color: #537ef4;
   }
   .book-appointment-btn:hover {
-    background-color: #45a049;
+    background-color:#537ef4;
   }
   .delete{
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #260ff4;
     color: white;
     border: none;
     border-radius: 5px;
@@ -112,5 +113,5 @@
     text-align: center;
   }
   .delete:hover {
-    background-color: #45a049;
+    background-color: #537ef4;
   }
