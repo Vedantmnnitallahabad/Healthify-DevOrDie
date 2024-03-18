@@ -173,6 +173,11 @@ app.get('/patientlogin',(req,res)=>{
 app.get('/patientreg',(req,res)=>{
     res.render('Signup');
 });
+
+app.get('/faq',(req,res)=>{
+    res.render('faq');
+});
+
 app.get('/doctorreg',(req,res)=>{
     res.render('Doctor_signup');
 });
@@ -202,7 +207,7 @@ app.get('/searchfordoctor',(req,res)=>{
     patientCheck(req, res);
     const id=req.params.id;
     const doc=await Doctor.findById(id);
-    res.render('appointment',{doc:doc});
+    res.render('x',{doc:doc});
   })
   app.post('/appointment/:id',async (req,res)=>{
     const id=req.params.id;
@@ -222,7 +227,8 @@ app.get('/searchfordoctor',(req,res)=>{
         time:req.body.time,
         pat_id:pat._id,
         doc_id:doc._id,
-        status:"PENDING"
+        status:"PENDING",
+        drive_link:req.body.drive_link
        }
         const appointment = new Appointment(apt);
         appointment.save()

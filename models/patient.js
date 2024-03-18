@@ -110,8 +110,12 @@ const doctorSchema=new Schema({
         status:{
             type:String,
             required:true
+        },
+
+         drive_link:{
+            type:String,
+            required:true
         }
-     
         },{timestamps:true});
 
         const contactSchema=new Schema({

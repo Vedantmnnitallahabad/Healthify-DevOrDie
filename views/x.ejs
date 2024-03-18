@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/x.css">
+</head>
+<body>
+    <div class="doctor-card">
+        <div class="reservation-form">
+            <h1 style="text-align: center;">Hii , Schedule Your appointment !!</h1>
+            <img src="/doctor.jpg" alt="Hotel image">
+            <form action="/appointment/<%=doc._id%>"  method="POST">
+              <label for="check-in">Scheduled Date:</label><br>
+              <input type="date" id="check-in" name="date" placeholder="mm/dd/yyyy"><br>
+              <label for="adults">Scheduled Time: </label><br>
+              <input type="time" id="adults" name="time" placeholder="1"><br><br>
+              <label for="link">Drive Link :</label><br>
+              <input type="text" name="drive_link" id="drive_link" placeholder="Enter the drive link of your report"><br>
+              <label for="email">Email :</label><br>
+              <input type="email" id="email" name="email" placeholder="Enter your email"><br>
+        
+             <button>SUBMIT</button>
+            </form>
+          </div>
+    </div>
+</body>
+</html>

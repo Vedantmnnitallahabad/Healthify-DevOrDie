@@ -29,6 +29,7 @@
                     DATE OF APPOINTMENT:<p class="doctor-experience"><%=appointment.date%></p>
                    TIME OF APPOINTMENT: <p class="doctor-qualifications"><%=appointment.time%></p><br>
                     <a class="book-appointment-btn" href="/findpat/<%=appointment.pat_id%>">VIEW PATIENT DETAILS</a><br><br><br>
+                    <a class="book-appointment-btn" href= <%=appointment.drive_link%> </a>VIEW REPORT</a><br><br><br>
                     <button class="decl" data-doc="<%=appointment._id%>" >DECLINE</button><br><br><br>
                     <button  class="acc" data-doc="<%=appointment._id%>">ACCEPT</button>
                   </div>
