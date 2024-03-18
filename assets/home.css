@@ -152,7 +152,7 @@
     margin-left: 10px;
 }
 .container1{
-    background-color: rgb(8, 8, 139);
+    background-color : rgb(8, 8, 139) ;
     height:250px;
     img{
         border-radius: 50%;
@@ -160,5 +160,5 @@
     color:white ;
 }
 .container1 .col{
-    margin-left: 20px;
+    margin-left:20px;
 }
