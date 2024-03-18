@@ -148,6 +148,17 @@
     width: 90%;
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 1px;
     margin-left: 10px;
+}
+.container1{
+    background-color: rgb(8, 8, 139);
+    height:250px;
+    img{
+        border-radius: 50%;
+    }
+    color:white ;
+}
+.container1 .col{
+    margin-left: 20px;
 }
