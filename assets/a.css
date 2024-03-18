@@ -69,7 +69,34 @@
     text-decoration: none;
     text-align: center;
   }
-  
+  .decl{
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    text-align: center;
+  }
+  .acc{
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    text-align: center;
+  }
+  .acc:hover {
+    background-color: #45a049;
+  }
+  .decl:hover {
+    background-color: #45a049;
+  }
   .book-appointment-btn:hover {
     background-color: #45a049;
   }
