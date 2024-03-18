@@ -139,3 +139,15 @@
     margin-top: 500px;
     text-align: center;
 }
+.nav-1{
+    background-color: rgb(219, 219, 250);
+    width : 100%;
+    height : 55px;
+}
+.nav-1 .content-navbars{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-left: 10px;
+}
