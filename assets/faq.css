@@ -1,0 +1,36 @@
+.homex{
+    margin-left: 10px; 
+    border:none ;
+ 
+}
+.homex:hover{
+background-color: lightblue;
+}
+.faq-page {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .faq-page h1 {
+    margin-bottom: 40px;
+  }
+  
+  .faq-item {
+    margin-bottom: 40px;
+  }
+  
+  .faq-item h2{
+    margin-bottom: 10px;
+  }
+  
+  .faq-item p {
+    margin: 0;
+  }
+  
+  .faq-page a {
+    color: #f00;
+    text-decoration: none;
+  }
