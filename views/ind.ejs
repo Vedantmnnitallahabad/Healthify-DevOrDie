@@ -12,7 +12,12 @@
     </style>
 </head>
 <body>
+  <div class="search">
+    <h1>Search Doctor Here</h1>
+    <input type="text" name="" id="find" placeholder="search here...." onkeyup="search()">
+    </div><br><br>
     <h1 class="dept"><%=DEPARTMENT%></h1><br><br>
+
     <%if(doctors.length>0){%>
       <div class="doc-repeat">
       <%doctors.forEach(doctor=>{ %>
@@ -39,5 +44,23 @@
      <h1>NO DOCTORS TO SHOW!!!</h1>
      <% }%>
     
+     <script type="text/javascript">
+      function search() {
+      let filter = document.getElementById('find').value.toUpperCase();
+      let item = document.querySelectorAll('.doctor-card');
+      let l = document.getElementsByTagName('a');
+      for(var i = 0;i<=l.length;i++){
+      let a=item[i].getElementsByTagName('a')[0];
+      let value=a.innerHTML || a.innerText || a.textContent;
+      if(value.toUpperCase().indexOf(filter) > -1) {
+      item[i].style.display="";
+      }
+      else
+      {
+      item[i].style.display="none";
+      }
+      }
+      }
+      </script>
 </body>
 </html>
