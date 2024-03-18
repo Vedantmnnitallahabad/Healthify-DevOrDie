@@ -211,14 +211,17 @@ app.get('/searchfordoctor',(req,res)=>{
   })
   app.post('/appointment/:id',async (req,res)=>{
     const id=req.params.id;
+    const doc=await Doctor.findById(id);
+    const existingapt=await Appointment.findOne({patientemail:req.body.email,doctoremail:doc.email});
+    const pat= await Patient.findOne({ email: req.body.email});
+   if(pat){
 
-    const existingapt=await Appointment.findOne({patientemail:req.body.email});
     if(existingapt && existingapt.status==="PENDING"){
         res.send('Appointment already booked');
     }
     else{
-        const doc=await Doctor.findById(id);
-        const pat= await Patient.findOne({ email: req.body.email});
+       
+
       
        const apt={
         doctoremail:doc.email,
@@ -243,8 +246,13 @@ app.get('/searchfordoctor',(req,res)=>{
             });
     
     }
-    
 
+   }
+    
+    
+else{
+    res.send('Email you entered is not registerd');
+}
   })
   app.get('/viewappointments/:id',async (req,res)=>{
     doctorCheck(req, res);
