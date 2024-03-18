@@ -68,9 +68,15 @@
 .answer-healthify{
     background-color: rgb(189, 233, 236);
 }
+
+.container-fluid .collapse .navbar-nav .nav-item .nav-limk{
+    :hover{
+        background-color: grey;
+
 .carousel-inner{
     img{
         width : 1360px;
         height : 300px;
+
     }
 }
