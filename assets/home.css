@@ -72,7 +72,8 @@
 .container-fluid .collapse .navbar-nav .nav-item .nav-limk{
     :hover{
         background-color: grey;
-
+    }
+}
 .carousel-inner{
     img{
         width : 1360px;
@@ -138,4 +139,3 @@
     margin-top: 500px;
     text-align: center;
 }
-
